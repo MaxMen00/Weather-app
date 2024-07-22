@@ -1,0 +1,34 @@
+{% extends "base.html"%}
+{% load static %}
+{% block title%}
+Лента погоды
+{% endblock %}
+{% block content %}
+
+    <div class="card_list">
+        <div class="card-container-wrapper">
+            <div class="card-header">
+                <h5>Погода для города {{ city_rus }}</h5>
+            </div>
+            <div class="card-container">
+                {% for item in weather_list %}
+                <div class="weather-card">
+                    <div>
+                        <h5>{{ item.index }}</h5>
+                        <img src="{% static 'img/icon/' %}{{ item.weather_icon }}">
+                        <p class="temperature">{{ item.temperature_2m }}°</p>
+                        <p class="subtitle">{{ item.weather_code }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-secondary" onclick="window.history.back();">Вернуться назад</button>
+            </div>
+        </div>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    </div>
+{% endblock %}
+
+

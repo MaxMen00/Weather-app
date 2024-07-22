@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main_form">
+    <div class="container">
+        <div class="row">
+            <div class="card box-shadow m-2 form-wrap">
+                <div class="card-header text-center">
+                    <h3>Погода</h3>
+                </div>
+                <form id="form" class="p-3" action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-4 mb-0">
+                            <label for="city">Введите Город*</label>
+                            <input id="city" type="text" class="form-control" placeholder="Укажите город" name="city" {% if city %} value="{{ city }}" {% endif %}>
+                            <div id="suggestions" class="suggestions"></div>
+                        </div>
+                    </div>
+                    <div class="submit-btn mt-3">
+                        <button type="submit" class="btn btn-primary">Рассчитать</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'scripts/redis_city.js' %}" async></script>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=user
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=16
+  webapp:
+    restart: always
+    build:
+      context: ./Weather-app
+    ports:
+      - "8000:8000"
+    command:
+      [
+        "python3",
+        "./app/manage.py",
+        "runserver",
+        "0.0.0.0:8000"
+      ]
+
+  worker:
+    restart: always
+    build:
+      context: ./Weather-app
+    command: [ 'celery', '--workdir=./app', '-A', 'app', 'worker' ]

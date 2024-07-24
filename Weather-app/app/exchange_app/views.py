@@ -12,11 +12,23 @@ translator = Translator()
 
 
 def exchange(request):
+    session_key = request.session.session_key
     if request.method == 'GET':
+        if session_key:
+            weather_hint_raw = SearchHistory.objects.values('city').filter(
+                session_key=session_key).order_by('-timestamp')[0]
+            weather_hint = translator.translate(
+                weather_hint_raw.get('city'), dest='ru').text
+            return render(
+                request=request,
+                template_name='weather_app/index.html',
+                context={'weather_hint': weather_hint,
+                         'weather_hint_raw': weather_hint_raw.get('city'),
+                         'modal_window_key': True}
+            )
         return render(request=request, template_name='weather_app/index.html')
 
     if request.method == 'POST':
-        session_key = request.session.session_key
         city_raw = str(request.POST.get('city'))
         city = translator.translate(city_raw, dest='en').text
         if not session_key:
@@ -43,4 +55,5 @@ def weather_list(request, city):
     city_rus = translator.translate(city, dest='ru').text
     context = {'weather_list': weather_data,
                'city': city, 'city_rus': city_rus}
-    return render(request=request, template_name='weather_app/index3.html', context=context)
+    return render(request=request,
+                  template_name='weather_app/list.html', context=context)

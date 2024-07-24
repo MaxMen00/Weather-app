@@ -5,7 +5,9 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-REDIS_HOST = 'redis'
+
+REDIS_HOST = '172.18.0.2'
+# REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
 

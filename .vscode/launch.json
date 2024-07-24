@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Отладчик Python: Django",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "Weather-app/app/manage.py",
+            "console": "integratedTerminal",
+            "args": [
+                "runserver"
+            ],
+            "justMyCode": true
+        }
+    ]
+}

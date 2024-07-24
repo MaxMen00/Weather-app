@@ -1,5 +1,4 @@
 {% extends "base.html"%}
-{% load static %}
 {% block title%}
 Лента погоды
 {% endblock %}
@@ -12,18 +11,11 @@
             </div>
             <div class="card-container">
                 {% for item in weather_list %}
-                <div class="weather-card">
-                    <div>
-                        <h5>{{ item.index }}</h5>
-                        <img src="{% static 'img/icon/' %}{{ item.weather_icon }}">
-                        <p class="temperature">{{ item.temperature_2m }}°</p>
-                        <p class="subtitle">{{ item.weather_code }}</p>
-                    </div>
-                </div>
+                    {% include "includes/array_weather.html" %} 
                 {% endfor %}
             </div>
             <div class="card-footer">
-                <button type="button" class="btn btn-secondary" onclick="window.history.back();">Вернуться назад</button>
+                <button type="button" class="btn btn-secondary" onclick="document.location='/'">Вернуться назад</button>
             </div>
         </div>
 

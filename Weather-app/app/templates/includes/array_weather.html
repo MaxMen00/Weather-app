@@ -1,0 +1,10 @@
+{% load static %}
+
+<div class="weather-card">
+    <div>
+        <h5>{{ item.index }}</h5>
+        <img src="{% static 'img/icon/' %}{{ item.weather_icon }}">
+        <p class="temperature">{{ item.temperature_2m }}°</p>
+        <p class="subtitle">{{ item.weather_code }}</p>
+    </div>
+</div>

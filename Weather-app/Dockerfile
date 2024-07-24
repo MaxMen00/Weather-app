@@ -8,7 +8,6 @@ COPY ./requirements.txt ./
 RUN pip install -r requirements.txt
 COPY ./app ./app
 
-RUN python3 ./app/manage.py makemigrations
 RUN python3 ./app/manage.py migrate
 
 CMD [ "python3", "./app/manage.py", "runserver", "0.0.0.0:8000"]
